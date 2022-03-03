@@ -35,5 +35,7 @@ public class TaskDataRepository {
         return mTaskDao.deleteTask(task);
     }
 
+    public long deleteAll() { return mTaskDao.deleteAll();}
+
 
 }

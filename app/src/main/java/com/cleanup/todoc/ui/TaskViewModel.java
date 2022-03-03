@@ -36,6 +36,8 @@ public class TaskViewModel extends ViewModel {
         return mTaskDataSource.getAllTasks();
     }
 
+    public void deleteAllTasks() {  mExecutor.execute(() -> mTaskDataSource.deleteAll());}
+
     public LiveData<List<Project>> getProjects(){
         return mProjectDataSource.getProjects();
     }
