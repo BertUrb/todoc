@@ -40,9 +40,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * List of all projects available in the application
      */
 
-
     private TaskViewModel mTaskViewModel;
-    private final Project[] allProjects = Project.getAllProjects();
+    private List<Project> allProjects;
 
     /**
      * List of all current tasks of the application
@@ -101,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
 
         mTaskViewModel.getTasks().observe(this, this::getTasksObserver);
+        mTaskViewModel.getProjects().observe(this, this::getProjectsObserver);
 
 
         listTasks = findViewById(R.id.list_tasks);
@@ -150,6 +150,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         updateTasks();
     }
 
+    private void getProjectsObserver(List<Project> projects) {
+        allProjects = projects;
+    }
+
     /**
      * Called when the user clicks on the positive button of the Create Task Dialog.
      *
@@ -174,17 +178,12 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             // If both project and name of the task have been set
             else if (taskProject != null) {
 
-
-
                 Task task = new Task(0,
                         taskProject.getId(),
                         taskName,
                         new Date().getTime()
                 );
-
                 addTask(task);
-
-
                 dialogInterface.dismiss();
             }
             // If name has been set, but project has not been set (this should never occur)

@@ -20,10 +20,6 @@ public class TaskDataRepository {
         return mTaskDao.getAllTasks();
     }
 
-    public LiveData<List<Task>> getTasksFromProject(long projectId)
-    {
-        return mTaskDao.getTasksFromProject(projectId);
-    }
 
     public long createTask(Task task)
     {

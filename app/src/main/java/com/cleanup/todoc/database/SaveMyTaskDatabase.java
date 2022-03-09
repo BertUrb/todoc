@@ -1,7 +1,6 @@
 package com.cleanup.todoc.database;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -14,7 +13,6 @@ import com.cleanup.todoc.database.dao.TaskDao;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
-import java.util.List;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
@@ -30,27 +28,18 @@ public abstract class SaveMyTaskDatabase extends RoomDatabase {
                             SaveMyTaskDatabase.class, "MyDatabase.db")
                             .addCallback(prepopulateDatabase())
                             .build();
-
                 }
-
             }
-
         }
-
-
         return INSTANCE;
-
-
     }
 
     private static Callback prepopulateDatabase() {
-
         return new Callback() {
 
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
               Project[] projectList = Project.getAllProjects();
-
                 for (Project project: projectList) {
                     Executors.newSingleThreadExecutor().execute(
                             () -> INSTANCE.projectDao().insertProject(project)
@@ -60,10 +49,7 @@ public abstract class SaveMyTaskDatabase extends RoomDatabase {
             }
 
         };
-
     }
-
     public abstract TaskDao taskDao();
-
     public abstract ProjectDao projectDao();
 }
