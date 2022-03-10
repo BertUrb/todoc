@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
         mTaskViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance(this)).get(TaskViewModel.class);
 
-
         mTaskViewModel.getTasks().observe(this, this::getTasksObserver);
         mTaskViewModel.getProjects().observe(this, this::getProjectsObserver);
 
